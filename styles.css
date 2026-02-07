@@ -1,0 +1,345 @@
+/* ===========================
+   Design System & Variables
+   =========================== */
+:root {
+    /* Color Palette - Dark, mysterious theme */
+    --bg-dark: hsl(220, 20%, 10%);
+    --bg-medium: hsl(220, 18%, 15%);
+    --bg-light: hsl(220, 16%, 20%);
+    
+    --accent-primary: hsl(45, 100%, 60%);    /* Warm yellow - vision cone */
+    --accent-danger: hsl(0, 85%, 60%);       /* Red - enemies */
+    --accent-success: hsl(140, 70%, 50%);    /* Green - goal */
+    --accent-player: hsl(200, 90%, 65%);     /* Blue - player */
+    
+    --text-primary: hsl(0, 0%, 95%);
+    --text-secondary: hsl(0, 0%, 70%);
+    --text-muted: hsl(0, 0%, 50%);
+    
+    /* Spacing */
+    --space-xs: 0.5rem;
+    --space-sm: 1rem;
+    --space-md: 1.5rem;
+    --space-lg: 2rem;
+    --space-xl: 3rem;
+    
+    /* Typography */
+    --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-display: 'Outfit', var(--font-primary);
+    
+    /* Borders & Radius */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    
+    /* Shadows */
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
+    
+    /* Transitions */
+    --transition-fast: 150ms ease;
+    --transition-normal: 250ms ease;
+    --transition-slow: 400ms ease;
+}
+
+/* ===========================
+   Global Styles
+   =========================== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-primary);
+    background: linear-gradient(135deg, var(--bg-dark) 0%, hsl(220, 25%, 8%) 100%);
+    color: var(--text-primary);
+    min-height: 100vh;
+    padding: var(--space-lg);
+    line-height: 1.6;
+}
+
+/* ===========================
+   Layout Components
+   =========================== */
+.game-container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+header {
+    text-align: center;
+    margin-bottom: var(--space-xl);
+    animation: fadeInDown 0.6s ease;
+}
+
+header h1 {
+    font-family: var(--font-display);
+    font-size: 3.5rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-player) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: var(--space-xs);
+    letter-spacing: -0.02em;
+}
+
+.tagline {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    font-style: italic;
+    opacity: 0;
+    animation: fadeIn 0.8s ease 0.3s forwards;
+}
+
+/* ===========================
+   Game Wrapper
+   =========================== */
+.game-wrapper {
+    display: grid;
+    grid-template-columns: 800px 1fr;
+    gap: var(--space-lg);
+    margin-bottom: var(--space-xl);
+    animation: fadeInUp 0.8s ease;
+}
+
+#gameCanvas {
+    background: var(--bg-medium);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    display: block;
+    border: 2px solid var(--bg-light);
+    transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+#gameCanvas:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+}
+
+/* ===========================
+   Info Panels
+   =========================== */
+.game-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.info-panel {
+    background: var(--bg-medium);
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--bg-light);
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.info-panel:hover {
+    transform: translateX(4px);
+    box-shadow: var(--shadow-md);
+}
+
+.info-panel h2 {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    margin-bottom: var(--space-sm);
+    color: var(--accent-primary);
+}
+
+.info-panel ul {
+    list-style: none;
+}
+
+.info-panel li {
+    padding: var(--space-xs) 0;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+}
+
+.info-panel li::before {
+    content: '▸';
+    color: var(--accent-primary);
+    font-weight: bold;
+}
+
+.info-panel strong {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.tip {
+    background: linear-gradient(135deg, rgba(45, 100, 60, 0.2), rgba(45, 100, 60, 0.1));
+    padding: var(--space-sm);
+    border-radius: var(--radius-sm);
+    border-left: 3px solid var(--accent-success);
+    margin-top: var(--space-sm);
+    font-size: 0.95rem;
+}
+
+.goal-marker {
+    color: var(--accent-success);
+    font-weight: 600;
+}
+
+.status-panel {
+    background: linear-gradient(135deg, var(--bg-light), var(--bg-medium));
+    border: 1px solid var(--accent-primary);
+}
+
+#gameStatus {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--accent-primary);
+}
+
+#levelInfo {
+    color: var(--text-secondary);
+    margin-top: var(--space-xs);
+}
+
+/* ===========================
+   Tutorial Section
+   =========================== */
+.tutorial {
+    animation: fadeInUp 1s ease;
+}
+
+.tutorial h2 {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: var(--space-lg);
+    color: var(--text-primary);
+}
+
+.tutorial-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-md);
+}
+
+.tutorial-card {
+    background: var(--bg-medium);
+    padding: var(--space-lg);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--bg-light);
+    box-shadow: var(--shadow-md);
+    transition: all var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+}
+
+.tutorial-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent-primary), var(--accent-player));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--transition-normal);
+}
+
+.tutorial-card:hover::before {
+    transform: scaleX(1);
+}
+
+.tutorial-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6);
+    border-color: var(--accent-primary);
+}
+
+.tutorial-card h3 {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    margin-bottom: var(--space-sm);
+    color: var(--accent-primary);
+}
+
+.tutorial-card p {
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+/* ===========================
+   Animations
+   =========================== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===========================
+   Responsive Design
+   =========================== */
+@media (max-width: 1200px) {
+    .game-wrapper {
+        grid-template-columns: 1fr;
+    }
+    
+    #gameCanvas {
+        width: 100%;
+        height: auto;
+    }
+    
+    .game-info {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    
+    .info-panel {
+        flex: 1;
+        min-width: 250px;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: var(--space-sm);
+    }
+    
+    header h1 {
+        font-size: 2.5rem;
+    }
+    
+    .tutorial-grid {
+        grid-template-columns: 1fr;
+    }
+}
