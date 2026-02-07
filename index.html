@@ -1,37 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blindspot - Stealth Puzzle Game</title>
-    <meta name="description" content="A stealth-puzzle game where enemies can only move when you're not looking at them. Master your vision cone and reach the exit!">
+    <meta name="description"
+        content="A stealth-puzzle game where enemies can only move when you're not looking at them. Master your vision cone and reach the exit!">
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <meta name="theme-color" content="#1a1d2e">
+
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <div class="game-container">
         <header>
             <h1>🎮 Blindspot</h1>
             <p class="tagline">They move when you're not looking...</p>
         </header>
-        
+
         <div class="game-wrapper">
             <canvas id="gameCanvas" width="800" height="600"></canvas>
-            
+
             <div class="game-info">
                 <div class="info-panel">
                     <h2>Controls</h2>
                     <ul>
                         <li><strong>Arrow Keys / WASD</strong> - Move & Look</li>
                         <li><strong>R</strong> - Restart Level</li>
+                        <li><strong>N</strong> - Next Level (when complete)</li>
                     </ul>
                 </div>
-                
+
                 <div class="info-panel">
                     <h2>Objective</h2>
                     <p>Reach the <span class="goal-marker">green goal</span> without being caught!</p>
                     <p class="tip">💡 Enemies freeze when you look at them</p>
                 </div>
-                
+
                 <div class="info-panel status-panel">
                     <h2>Status</h2>
                     <p id="gameStatus">Ready to play!</p>
@@ -39,7 +51,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="tutorial">
             <h2>🎓 How It Works</h2>
             <div class="tutorial-grid">
@@ -58,7 +70,8 @@
             </div>
         </div>
     </div>
-    
+
     <script src="game.js"></script>
 </body>
+
 </html>
